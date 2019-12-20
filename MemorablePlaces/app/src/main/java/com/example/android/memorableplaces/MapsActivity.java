@@ -26,6 +26,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -40,6 +41,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     LocationListener locationListener;
 
     Geocoder geocoder;
+
+    ArrayList<String> newmap = new ArrayList<String>();
+    ArrayList<String> newlati = new ArrayList<String>();
+    ArrayList<String> newlongi = new ArrayList<String>();
+
+    static int flag=1;
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -186,6 +193,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }catch (Exception e){
             Log.i("Errorrr","Adding"+e.getMessage());
             Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+        }
+        try{
+            if(flag==1){
+                for(int i=1;i<MainActivity.maps.size()-1;i++){
+                    newmap.add(MainActivity.maps.get(i));
+                }
+                flag=0;
+            }
+            newmap.add(address);
+            newlati.add(String.valueOf(latLng.latitude));
+            newlongi.add(String.valueOf(latLng.longitude));
+            MainActivity.sharedPreferences.edit().putString("Maps",ObjectSerializer.serialize(newmap)).apply();
+            MainActivity.sharedPreferences.edit().putString("Lati",ObjectSerializer.serialize(newlati)).apply();
+            MainActivity.sharedPreferences.edit().putString("Longi",ObjectSerializer.serialize(newlongi)).apply();
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 }
