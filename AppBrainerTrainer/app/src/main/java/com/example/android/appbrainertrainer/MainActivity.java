@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
         time.setVisibility(View.INVISIBLE);
         ques.setVisibility(View.INVISIBLE);
         again.setVisibility(View.INVISIBLE);
-        change();
     }
 
     public void change()    {
@@ -112,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
         ques.setVisibility(View.VISIBLE);
         Button go = (Button)findViewById(R.id.go);
         go.setVisibility(View.INVISIBLE);
+        change();
     }
 
     public void playagain(View view)    {

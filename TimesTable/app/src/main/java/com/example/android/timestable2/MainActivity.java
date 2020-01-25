@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
 		SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
 
-		seekBar.setMax(20);
+		seekBar.setMax(50);
 		seekBar.setProgress(10);
 
 		final ArrayList<String> arrayList = new ArrayList<String>();
